@@ -2,19 +2,108 @@
 
 :root {
   --ref-section-height: 100vh;
+  --color-background: #2f4454;
+  --color-darkRed: #2e151b;
+  --color-hotPink: #da7b93;
+  --color-kaki: #376e6f;
+  --color-darkGreen: #1c3334;
 }
 
 body {
   box-sizing: border-box;
-  background-color: #000;
+  background-color: var(--color-background);
 }
 
+/* -- loading action */
+body.before-load {
+  overflow: hidden;
+  /* loading 상태에서는 스크롤바가 안나오게(콘텐츠가 화면크기보다 크니까 스크롤바 나옴) 넘치는 화면 안보이도록 설정 */
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  z-index: 100;
+  background: var(--color-background);
+}
+
+.before-load .main-container {
+  display: none;
+  /* 다 완성한 후 중간쯤에서 페이지 리프레쉬 했을 때, 씬의 정상적인 높이값이 다 계산되기 전에 화면이 표시되면서 이상한 화면이 나오게 됨(최초에는 엘러먼트들이 자기가 가지고 있는 높이 값으로 표시되다가, 스크립트가 원래의 높이를 할당해 줌) */
+  /* 이를 막기위해 높이값이 적용되기 전에(setLayout)는 안보이게 하다가, 끝나면 그제서야 보이게 설정해줌. 그러기 위해 전체 엘러먼트들을 최초에는 안보임 처리 */
+}
+
+.before-load .loading {
+  opacity: 1;
+}
+
+.loading-circle {
+  width: 54px;
+  /*원의r이25고stroke를4px줬으므로크기를54로잡음.boderWidth는선의중심을기준으로양쪽으로넓어짐*/
+  height: 54px;
+  animation: loading-spin 3s infinite;
+  -webkit-animation: loading-spin 3s infinite;
+}
+.loading-circle circle {
+  stroke: var(--color-hotPink);
+  stroke-width: 4;
+  /*부모svg태그의단위를쫓아간다.따로언급안해도됨*/
+  stroke-dasharray: 157;
+  /*지정한값만큼그려주고띄우고그려주고띄우고를함.최대값은곧전체가다그려진그림*/ /*최대값은브라우저개발자도구에서하나씩키워가며알아도되고,엘러먼트를가져와서getTotalLength()를실행해도얻을수있다.*/
+  stroke-dashoffset: 0;
+  /*그려진선을이동시키는것.+는오른쪽(나타나는쪽)으로-는왼쪽(없어지는쪽으로)으로이동시킨다.직선의이동생각할것*/
+  fill: transparent;
+  /*transition: 1s;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+  */
+  animation: loading-circle-ani 1s infinite;
+  -webkit-animation: loading-circle-ani 1s infinite;
+}
+
+@keyframes loading-spin {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-circle-ani {
+  0% {
+    stroke-dashoffset: 157;
+  }
+  75% {
+    stroke-dashoffset: -147;
+  }
+  100% {
+    stroke-dashoffset: -157;
+  }
+}
+
+/* -- container */
 .main-container {
   height: calc(var(--ref-section-height) * 8);
   width: 70%;
   margin: 4em auto;
   margin-bottom: 0;
-  background-color: rgb(120, 129, 107);
+  background-color: var(--color-background);
 }
 .header {
   display: flex;
@@ -48,7 +137,6 @@ section.introduction {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: paleturquoise;
 }
 section.introduction .catagory {
   width: 25%;
@@ -61,15 +149,22 @@ section.introduction .catagory {
 section.introduction .catagory .upper {
   width: 100%;
   height: 75%;
-  background-color: rgb(112, 91, 65);
+  background-color: var(--color-darkRed);
 }
+
+section.introduction .catagory .upper > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 section.introduction .catagory .bottom {
   width: 100%;
   height: 25%;
-  background-color: rgba(68, 183, 133, 0.675);
+  background-color: var(--color-hotPink);
 }
 section.detail {
   width: 100%;
   height: 1080px;
-  background-color: rgba(216, 168, 44, 0.645);
+  background-color: var(--color-kaki);
 }
