@@ -2,11 +2,14 @@
 
 :root {
   --ref-section-height: 100vh;
-  --color-background: #2f4454;
+
+  --color-background: #1c3334;
   --color-darkRed: #2e151b;
   --color-hotPink: #da7b93;
   --color-kaki: #376e6f;
-  --color-darkGreen: #1c3334;
+  --color-darkKaki: #2f4454;
+
+  --color-font: #9f9f9f;
 }
 
 body {
@@ -101,7 +104,7 @@ body.before-load {
 .main-container {
   height: calc(var(--ref-section-height) * 8);
   width: 70%;
-  margin: 4em auto;
+  margin: 6em auto;
   margin-bottom: 0;
   background-color: var(--color-background);
 }
@@ -110,11 +113,13 @@ body.before-load {
   justify-content: space-between;
   position: fixed;
   width: 70%;
-  color: #fff;
+  color: var(--color-font);
+  font-weight: bold;
   top: 0;
   left: 15%;
-  height: 4em;
-  /* background-color: #6db879; */
+  height: 5em;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-kaki);
 }
 .header .Gnv-left {
   display: flex;
@@ -131,17 +136,24 @@ body.before-load {
   width: 30%;
 }
 
-section.introduction {
+.section-container {
   width: 100%;
-  height: calc(var(--ref-section-height) - 4em);
+  height: calc((var(--ref-section-height) - 7em) * 8);
+}
+section.introduction {
+  position: sticky;
+  top: 6em;
+  left: 0;
+  width: 100%;
+  height: calc((var(--ref-section-height) - 7em));
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 section.introduction .catagory {
-  width: 25%;
+  width: 24%;
   height: 100%;
-  border: 1px solid #49428e;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,7 +161,7 @@ section.introduction .catagory {
 section.introduction .catagory .upper {
   width: 100%;
   height: 75%;
-  background-color: var(--color-darkRed);
+  /* background-color: var(--color-darkRed); */
 }
 
 section.introduction .catagory .upper > img {
@@ -162,6 +174,10 @@ section.introduction .catagory .bottom {
   width: 100%;
   height: 25%;
   background-color: var(--color-hotPink);
+}
+
+section.introduction .catagory:nth-child(even) .bottom {
+  background-color: var(--color-darkRed);
 }
 section.detail {
   width: 100%;
