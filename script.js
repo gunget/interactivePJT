@@ -54,7 +54,6 @@
 
   function introAni(elem) {
     const elemNum = Number(elem.dataset.elnum);
-    console.log(typeof elemNum);
   }
   introAni(introCtgrElems[0]);
   window.addEventListener("scroll", () => {

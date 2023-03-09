@@ -138,7 +138,7 @@ body.before-load {
 
 .section-container {
   width: 100%;
-  height: calc((var(--ref-section-height) - 7em) * 8);
+  height: calc((var(--ref-section-height) - 7em) * 12);
 }
 section.introduction {
   position: sticky;
@@ -179,8 +179,8 @@ section.introduction .category .bottom {
 section.introduction .category:nth-child(even) .bottom {
   background-color: var(--color-darkRed);
 }
-section.detail {
+/* section.detail {
   width: 100%;
   height: 1080px;
   background-color: var(--color-kaki);
-}
+} */
