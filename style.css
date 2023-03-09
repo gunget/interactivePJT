@@ -151,32 +151,32 @@ section.introduction {
   justify-content: space-between;
   align-items: center;
 }
-section.introduction .catagory {
+section.introduction .category {
   width: 24%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-section.introduction .catagory .upper {
+section.introduction .category .upper {
   width: 100%;
   height: 75%;
   /* background-color: var(--color-darkRed); */
 }
 
-section.introduction .catagory .upper > img {
+section.introduction .category .upper > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-section.introduction .catagory .bottom {
+section.introduction .category .bottom {
   width: 100%;
   height: 25%;
   background-color: var(--color-hotPink);
 }
 
-section.introduction .catagory:nth-child(even) .bottom {
+section.introduction .category:nth-child(even) .bottom {
   background-color: var(--color-darkRed);
 }
 section.detail {

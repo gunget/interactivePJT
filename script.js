@@ -2,6 +2,10 @@
   const introImgCT = document.querySelectorAll(".upper");
   const loadingElem = document.querySelector(".loading");
 
+  const sectionIntroElem = document.querySelector(".section-container");
+  const introCtgrElems = document.querySelectorAll(".category");
+  let scrollPercent;
+
   const images = [];
   const imgNums = 4;
 
@@ -10,7 +14,8 @@
   }
 
   function getFreePics() {
-    fetch("https://picsum.photos/350/750") //별도 언급 없으면 get방식 요청. promise객체로 만들어서 전송
+    fetch("../images/3.jpg") //별도 언급 없으면 get방식 요청. promise객체로 만들어서 전송
+      // fetch("https://picsum.photos/350/750") //별도 언급 없으면 get방식 요청. promise객체로 만들어서 전송
       //정상적으로 응답이 완료되면 response를 돌려줌. 안되면 될때까지 pending상태
       .then((res) => {
         if (res.url) {
@@ -37,4 +42,23 @@
       document.body.removeChild(loadingElem);
     }
   }, 300);
+
+  function getTotalLength() {
+    const sectionRealHeight =
+      sectionIntroElem.offsetHeight - window.innerHeight;
+    const winScrollTop = window.scrollY;
+    const scrollRatio = winScrollTop / sectionRealHeight;
+    scrollPercent = scrollRatio * 100;
+  }
+  // console.log(introCtgrElems);
+
+  function introAni(elem) {
+    const elemNum = Number(elem.dataset.elnum);
+    console.log(typeof elemNum);
+  }
+  introAni(introCtgrElems[0]);
+  window.addEventListener("scroll", () => {
+    getTotalLength();
+    // console.log(`${scrollPercent}%`);
+  });
 })();
