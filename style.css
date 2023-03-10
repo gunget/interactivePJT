@@ -137,6 +137,7 @@ body.before-load {
 }
 
 .section-container {
+  position: relative;
   width: 100%;
   height: calc((var(--ref-section-height) - 7em) * 12);
 }

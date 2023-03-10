@@ -50,14 +50,16 @@
     const scrollRatio = winScrollTop / sectionRealHeight;
     scrollPercent = scrollRatio * 100;
   }
-  // console.log(introCtgrElems);
+  // console.log(introCtgrElems[0]);
 
   function introAni(elem) {
     const elemNum = Number(elem.dataset.elnum);
+    elem.style.transform = `translateX(-${scrollPercent * elemNum}em)`;
   }
-  introAni(introCtgrElems[0]);
+
   window.addEventListener("scroll", () => {
     getTotalLength();
+    introAni(introCtgrElems[2]);
     // console.log(`${scrollPercent}%`);
   });
 })();
