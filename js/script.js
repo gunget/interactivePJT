@@ -1,4 +1,7 @@
+import { IntroCard } from "./introCard.js";
+
 (function () {
+  const mainCT = document.querySelector(".main-container");
   const introImgCT = document.querySelectorAll(".upper");
   const loadingElem = document.querySelector(".loading");
 
@@ -6,8 +9,43 @@
   const introCtgrElems = document.querySelectorAll(".category");
   let scrollPercent;
 
+  //image handling
   const images = [];
   const imgNums = 4;
+
+  //intro - card working range
+  const introActingRange = {
+    card1: {
+      rngA: { start: 2, end: 4 },
+      rngB: { start: 4, end: 6 },
+      rngC: null,
+      rngD: null,
+    },
+    card2: {
+      rngA: { start: 1, end: 2 },
+      rngB: { start: 5, end: 6 },
+      rngC: { start: 8, end: 9 },
+      rngD: null,
+    },
+    card3: {
+      rngA: { start: 2, end: 4 },
+      rngB: null,
+      rngC: { start: 9, end: 11 },
+      rngD: { start: 12, end: 13 },
+    },
+    card4: {
+      rngA: { start: 2, end: 4 },
+      rngB: null,
+      rngC: null,
+      rngD: { start: 13, end: 16 },
+    },
+  };
+
+  const card = new IntroCard();
+
+  //ani range setting
+  const totalSteps = 16;
+  const stepHeight = mainCT.offsetHeight / totalSteps;
 
   for (let index = 0; index < imgNums; index++) {
     getFreePics();
@@ -59,7 +97,6 @@
 
   window.addEventListener("scroll", () => {
     getTotalLength();
-    introAni(introCtgrElems[2]);
     // console.log(`${scrollPercent}%`);
   });
 })();
