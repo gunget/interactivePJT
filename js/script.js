@@ -6,46 +6,47 @@ import { IntroCard } from "./introCard.js";
   const loadingElem = document.querySelector(".loading");
 
   const sectionIntroElem = document.querySelector(".section-container");
+  const sectionRealHeight = sectionIntroElem.offsetHeight - window.innerHeight;
   const introCtgrElems = document.querySelectorAll(".category");
-  let scrollPercent;
+  const introCT = document.querySelector(".introduction");
+  let scrollPercent, stepHeight;
 
   //image handling
   const images = [];
   const imgNums = 4;
 
+  //intro - ani range setting
+  const totalSteps = 16;
+  const cardsPosX = [];
+  const introCard = [];
+
   //intro - card working range
   const introActingRange = {
-    card1: {
+    card0: {
       rngA: { start: 2, end: 4 },
       rngB: { start: 4, end: 6 },
       rngC: null,
       rngD: null,
     },
-    card2: {
+    card1: {
       rngA: { start: 1, end: 2 },
       rngB: { start: 5, end: 6 },
       rngC: { start: 8, end: 9 },
       rngD: null,
     },
-    card3: {
+    card2: {
       rngA: { start: 2, end: 4 },
       rngB: null,
       rngC: { start: 9, end: 11 },
       rngD: { start: 12, end: 13 },
     },
-    card4: {
+    card3: {
       rngA: { start: 2, end: 4 },
       rngB: null,
       rngC: null,
       rngD: { start: 13, end: 16 },
     },
   };
-
-  const card = new IntroCard();
-
-  //ani range setting
-  const totalSteps = 16;
-  const stepHeight = mainCT.offsetHeight / totalSteps;
 
   for (let index = 0; index < imgNums; index++) {
     getFreePics();
@@ -78,25 +79,44 @@ import { IntroCard } from "./introCard.js";
         elem.innerHTML = images[idx];
       });
       document.body.removeChild(loadingElem);
+      getPositionData();
+      //loading때문에 loading이 끝난후 position값 호출
+      setIntroCards();
     }
   }, 300);
 
+  function getPositionData() {
+    stepHeight = mainCT.offsetHeight / totalSteps;
+    introCtgrElems.forEach((elem) => {
+      const tempValue = elem.getBoundingClientRect().left;
+      cardsPosX.push(tempValue);
+    });
+  }
+
   function getTotalLength() {
-    const sectionRealHeight =
-      sectionIntroElem.offsetHeight - window.innerHeight;
     const winScrollTop = window.scrollY;
     const scrollRatio = winScrollTop / sectionRealHeight;
     scrollPercent = scrollRatio * 100;
   }
-  // console.log(introCtgrElems[0]);
 
-  function introAni(elem) {
-    const elemNum = Number(elem.dataset.elnum);
-    elem.style.transform = `translateX(-${scrollPercent * elemNum}em)`;
+  function setIntroCards() {
+    introCtgrElems.forEach((elem, idx) => {
+      const card = new IntroCard(
+        elem,
+        idx,
+        stepHeight,
+        introActingRange[`card${idx}`],
+        scrollPercent
+      );
+      introCard.push(card);
+    });
   }
+  // function introAni(elem) {
+  //   const elemNum = Number(elem.dataset.elnum);
+  //   elem.style.transform = `translateX(-${scrollPercent * elemNum}em)`;
+  // }
 
   window.addEventListener("scroll", () => {
     getTotalLength();
-    // console.log(`${scrollPercent}%`);
   });
 })();
