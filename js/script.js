@@ -9,7 +9,7 @@ import { IntroCard } from "./introCard.js";
   const sectionRealHeight = sectionIntroElem.offsetHeight - window.innerHeight;
   const introCtgrElems = document.querySelectorAll(".category");
   const introCT = document.querySelector(".introduction");
-  let scrollPercent, stepHeight;
+  let scrollPercent, scrollRatio, stepHeight, scrollY;
 
   //image handling
   const images = [];
@@ -94,8 +94,8 @@ import { IntroCard } from "./introCard.js";
   }
 
   function getTotalLength() {
-    const winScrollTop = window.scrollY;
-    const scrollRatio = winScrollTop / sectionRealHeight;
+    scrollY = window.scrollY;
+    scrollRatio = scrollY / sectionRealHeight;
     scrollPercent = scrollRatio * 100;
   }
 
@@ -105,8 +105,7 @@ import { IntroCard } from "./introCard.js";
         elem,
         idx,
         stepHeight,
-        introActingRange[`card${idx}`],
-        scrollPercent
+        introActingRange[`card${idx}`]
       );
       introCard.push(card);
     });
@@ -118,5 +117,6 @@ import { IntroCard } from "./introCard.js";
 
   window.addEventListener("scroll", () => {
     getTotalLength();
+    introCard[0].foldingCards(scrollY, scrollPercent);
   });
 })();
