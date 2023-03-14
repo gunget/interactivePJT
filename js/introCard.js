@@ -17,7 +17,8 @@ export class IntroCard {
           scrollY > rangeA.start * this.stepHeight &&
           scrollY <= rangeA.end * this.stepHeight
         ) {
-          // this.card.style.width = `${scrollY / 10}%`;
+          this.card.style.width = `${scrollY / 20}%`;
+          this.card.style.zIndex = 1;
         } else if (scrollY > rangeA.end * this.stepHeight) {
           console.log("stop there");
         }
