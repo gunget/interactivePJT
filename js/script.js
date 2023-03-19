@@ -23,7 +23,7 @@ import { IntroCard } from "./introCard.js";
   //intro - card working range
   const introActingRange = {
     card0: {
-      rngA: { start: 2, end: 4 },
+      rngA: { start: 1, end: 4 },
       rngB: { start: 4, end: 6 },
       rngC: null,
       rngD: null,
