@@ -117,6 +117,8 @@ import { IntroCard } from "./introCard.js";
 
   window.addEventListener("scroll", () => {
     getTotalLength();
-    introCard[0].foldingCards(scrollY, scrollPercent);
+    introCard.forEach((item) => {
+      item.foldingCards(scrollY, scrollPercent);
+    });
   });
 })();
